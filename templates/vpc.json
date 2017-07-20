@@ -121,6 +121,16 @@
                 ]
             }
         },
+
+        "PrivateRoute" : {
+            "Type" : "AWS::EC2::Route",
+            "Properties" : {
+                "RouteTableId" : { "Ref" : "PrivateRouteTable" },
+                "DestinationCidrBlock" : "0.0.0.0/0",
+            "NatGatewayId" : { "Ref" : "NATGateway" }
+            }
+        },
+
     },
     "Outputs": {
         "VpcId": {
