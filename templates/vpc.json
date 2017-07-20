@@ -101,6 +101,14 @@
                 "GatewayId" : { "Ref" : "InternetGateway" }
             }
         },
+
+        "PublicSubnetRouteTableAssociation1" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+                "SubnetId" : { "Ref" : "PublicSubnet1" },
+                "RouteTableId" : { "Ref" : "PublicRouteTable" }
+            }
+        },
     },
     "Outputs": {
         "VpcId": {
