@@ -10,7 +10,10 @@
             "Properties": {
                 "CidrBlock": {
                 "Ref": "CidrBlock"
-                }
+                },
+            "Tags": [
+                {"Key" : "Name", "Value" : "vpc-lab-mihail" }
+            ]
             }
         }
     },
