@@ -15,7 +15,19 @@
                 {"Key" : "Name", "Value" : "vpc-lab-mihail" }
             ]
             }
-        }
+        },
+
+        "PublicSubnet1" : {
+            "Type" : "AWS::EC2::Subnet",
+            "Properties" : {
+                "VpcId" : { "Ref" : "VPC" },
+                "CidrBlock" : "10.0.0.0/24",
+                "AvailabilityZone" : { "Fn::Select" : ["0", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
+                "Tags" : [
+                    {"Key" : "Network", "Value" : "Public" }
+                ]
+            }
+        },
     },
     "Outputs": {
         "VpcId": {
