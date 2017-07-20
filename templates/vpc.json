@@ -26,7 +26,8 @@
                 "AvailabilityZone" : { "Fn::Select" : ["0", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
                 "Tags" : [
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
-                    {"Key" : "Network", "Value" : "Public" }
+                    {"Key" : "Network", "Value" : "Public" },
+                    {"Key" : "Name", "Value" : "PublicSubnet1" }
                 ]
             }
         },
@@ -39,7 +40,8 @@
                 "AvailabilityZone" : { "Fn::Select" : ["1", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
                 "Tags" : [
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
-                    {"Key" : "Network", "Value" : "Private" }
+                    {"Key" : "Network", "Value" : "Private" },
+                    {"Key" : "Name", "Value" : "PrivateSubnet1" }
                 ]
             }
         },
@@ -49,7 +51,8 @@
             "Properties" : {
                 "Tags" : [
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
-                    {"Key" : "Network", "Value" : "Public" }
+                    {"Key" : "Network", "Value" : "Public" },
+                    {"Key" : "Name", "Value" : "InternetGateway" }
                 ]
             }
         },
@@ -83,7 +86,8 @@
                 "VpcId" : {"Ref" : "VPC"},
                 "Tags" : [
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
-                    {"Key" : "Network", "Value" : "Public" }
+                    {"Key" : "Network", "Value" : "Public" },
+                    {"Key" : "Name", "Value" : "PublicRouteTable" }
                 ]
             }
         },
