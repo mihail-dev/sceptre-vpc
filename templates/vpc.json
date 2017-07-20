@@ -40,6 +40,23 @@
                 ]
             }
         },
+
+        "InternetGateway" : {
+            "Type" : "AWS::EC2::InternetGateway",
+            "Properties" : {
+                "Tags" : [
+                    {"Key" : "Network", "Value" : "Public" }
+                ]
+            }
+        },
+
+        "GatewayToInternet" : {
+            "Type" : "AWS::EC2::VPCGatewayAttachment",
+            "Properties" : {
+                "VpcId" : { "Ref" : "VPC" },
+                "InternetGatewayId" : { "Ref" : "InternetGateway" }
+            }
+        },
     },
     "Outputs": {
         "VpcId": {
