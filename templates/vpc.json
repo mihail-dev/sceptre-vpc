@@ -137,6 +137,36 @@
                 "SubnetId" : { "Ref" : "PrivateSubnet1" },
                 "RouteTableId" : { "Ref" : "PrivateRouteTable" }
             }
+        },
+
+        "BastionElasticIP": {
+            "Type" : "AWS::EC2::EIP",
+            "Properties" : {
+                "Domain" : "vpc"
+            }
+        },
+
+        "BastionEC2Instance" : {
+            "Type" : "AWS::EC2::Instance",
+            "Properties" : {
+                "ImageId" : "ami-d7b9a2b1",
+                "KeyName" : "mihail.ivanov",
+                "InstanceType" : "t2.small",
+                "SubnetId" : { "Ref" : "PublicSubnet1" },
+                "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Network", "Value" : "Public" },
+                    {"Key" : "Name", "Value" : "Bastion" }
+                ]
+            }
+        },
+
+        "BastionElasticIPAssociation" : {
+            "Type": "AWS::EC2::EIPAssociation",
+            "Properties": {
+                "AllocationId" : { "Fn::GetAtt" : ["BastionElasticIP", "AllocationId"] },
+                "InstanceId": { "Ref" : "BastionEC2Instance" }
+            }
         }
 
     },
