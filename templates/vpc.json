@@ -109,6 +109,18 @@
                 "RouteTableId" : { "Ref" : "PublicRouteTable" }
             }
         },
+
+        "PrivateRouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+                "VpcId" : {"Ref" : "VPC"},
+                "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Network", "Value" : "Private" },
+                    {"Key" : "Name", "Value" : "PrivateRouteTable" }
+                ]
+            }
+        },
     },
     "Outputs": {
         "VpcId": {
