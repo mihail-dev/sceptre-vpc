@@ -9,11 +9,12 @@
             "Type": "AWS::EC2::VPC",
             "Properties": {
                 "CidrBlock": {
-                "Ref": "CidrBlock"
+                    "Ref": "CidrBlock"
                 },
-            "Tags": [
-                {"Key" : "Name", "Value" : "vpc-lab-mihail" }
-            ]
+                "Tags": [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Name", "Value" : "vpc-lab-mihail" }
+                ]
             }
         },
 
@@ -24,6 +25,7 @@
                 "CidrBlock" : "10.0.0.0/24",
                 "AvailabilityZone" : { "Fn::Select" : ["0", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
                 "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
                     {"Key" : "Network", "Value" : "Public" }
                 ]
             }
@@ -36,6 +38,7 @@
                 "CidrBlock" : "10.0.1.0/24",
                 "AvailabilityZone" : { "Fn::Select" : ["1", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
                 "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
                     {"Key" : "Network", "Value" : "Private" }
                 ]
             }
@@ -45,6 +48,7 @@
             "Type" : "AWS::EC2::InternetGateway",
             "Properties" : {
                 "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
                     {"Key" : "Network", "Value" : "Public" }
                 ]
             }
@@ -69,7 +73,7 @@
             "Type" : "AWS::EC2::NatGateway",
             "Properties" : {
                 "AllocationId" : { "Fn::GetAtt" : ["ElasticIP", "AllocationId"] },
-                "SubnetId" : { "Ref" : "PublicSubnet1" }
+                "SubnetId" : { "Ref" : "PublicSubnet1" },
             }
         }
     },
