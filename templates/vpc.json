@@ -131,6 +131,14 @@
             }
         },
 
+        "PrivateSubnetRouteTableAssociation" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+                "SubnetId" : { "Ref" : "PrivateSubnet1" },
+                "RouteTableId" : { "Ref" : "PrivateRouteTable" }
+            }
+        }
+
     },
     "Outputs": {
         "VpcId": {
