@@ -75,7 +75,18 @@
                 "AllocationId" : { "Fn::GetAtt" : ["ElasticIP", "AllocationId"] },
                 "SubnetId" : { "Ref" : "PublicSubnet1" },
             }
-        }
+        },
+
+        "PublicRouteTable" : {
+            "Type" : "AWS::EC2::RouteTable",
+            "Properties" : {
+                "VpcId" : {"Ref" : "VPC"},
+                "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Network", "Value" : "Public" }
+                ]
+            }
+        },
     },
     "Outputs": {
         "VpcId": {
