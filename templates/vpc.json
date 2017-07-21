@@ -104,7 +104,7 @@
             "Type" : "AWS::EC2::NatGateway",
             "Properties" : {
                 "AllocationId" : { "Fn::GetAtt" : ["ElasticIP", "AllocationId"] },
-                "SubnetId" : { "Ref" : "PublicSubnet1" },
+                "SubnetId" : { "Ref" : "PublicSubnet1" }
             }
         },
 
@@ -226,7 +226,13 @@
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
                     {"Key" : "Network", "Value" : "Public" },
                     {"Key" : "Name", "Value" : "Bastion" }
-                ]
+                ],
+                "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+                    "#!/bin/bash -xe\n",
+                    "yum update -y && yum install docker -y\n",
+                    "service docker start\n",
+                    "chkconfig docker on\n"
+                ]]}}
             }
         },
 
