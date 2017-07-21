@@ -32,7 +32,7 @@
             }
         },
 
-        "PrivateSubnet1" : {
+        "PublicSubnet2" : {
             "Type" : "AWS::EC2::Subnet",
             "Properties" : {
                 "VpcId" : { "Ref" : "VPC" },
@@ -40,8 +40,36 @@
                 "AvailabilityZone" : { "Fn::Select" : ["1", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
                 "Tags" : [
                     {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Network", "Value" : "Public" },
+                    {"Key" : "Name", "Value" : "PublicSubnet2" }
+                ]
+            }
+        },
+
+        "PrivateSubnet1" : {
+            "Type" : "AWS::EC2::Subnet",
+            "Properties" : {
+                "VpcId" : { "Ref" : "VPC" },
+                "CidrBlock" : "10.0.2.0/24",
+                "AvailabilityZone" : { "Fn::Select" : ["0", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
+                "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
                     {"Key" : "Network", "Value" : "Private" },
                     {"Key" : "Name", "Value" : "PrivateSubnet1" }
+                ]
+            }
+        },
+
+        "PrivateSubnet2" : {
+            "Type" : "AWS::EC2::Subnet",
+            "Properties" : {
+                "VpcId" : { "Ref" : "VPC" },
+                "CidrBlock" : "10.0.3.0/24",
+                "AvailabilityZone" : { "Fn::Select" : ["1", { "Fn::GetAZs" : { "Ref" : "AWS::Region" } }]},
+                "Tags" : [
+                    {"Key" : "ProjectName", "Value" : "sceptre-vpc-lab-mihail"},
+                    {"Key" : "Network", "Value" : "Private" },
+                    {"Key" : "Name", "Value" : "PrivateSubnet2" }
                 ]
             }
         },
@@ -110,6 +138,14 @@
             }
         },
 
+        "PublicSubnetRouteTableAssociation2" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+                "SubnetId" : { "Ref" : "PublicSubnet2" },
+                "RouteTableId" : { "Ref" : "PublicRouteTable" }
+            }
+        },
+
         "PrivateRouteTable" : {
             "Type" : "AWS::EC2::RouteTable",
             "Properties" : {
@@ -131,10 +167,18 @@
             }
         },
 
-        "PrivateSubnetRouteTableAssociation" : {
+        "PrivateSubnetRouteTableAssociation1" : {
             "Type" : "AWS::EC2::SubnetRouteTableAssociation",
             "Properties" : {
                 "SubnetId" : { "Ref" : "PrivateSubnet1" },
+                "RouteTableId" : { "Ref" : "PrivateRouteTable" }
+            }
+        },
+
+        "PrivateSubnetRouteTableAssociation2" : {
+            "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties" : {
+                "SubnetId" : { "Ref" : "PrivateSubnet2" },
                 "RouteTableId" : { "Ref" : "PrivateRouteTable" }
             }
         },
